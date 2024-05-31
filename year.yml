@@ -1,0 +1,13 @@
+parameters:
+  - name: year
+    in: path
+    type: integer
+    required: true
+    description: The year of the CVEs
+responses:
+  200:
+    description: List of CVEs for the specified year
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/CVE'

@@ -1,0 +1,18 @@
+parameters
+  - name min_score
+    in query
+    type number
+    required true
+    description The minimum CVSS score
+  - name max_score
+    in query
+    type number
+    required true
+    description The maximum CVSS score
+responses
+  200
+    description List of CVEs within the specified score range
+    schema
+      type array
+      items
+        $ref '#definitionsCVE'

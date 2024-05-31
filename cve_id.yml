@@ -1,0 +1,29 @@
+parameters:
+  - name: cve_id
+    in: path
+    type: string
+    required: true
+    description: The CVE ID
+responses:
+  200:
+    description: CVE details
+    schema:
+      id: CVE
+      properties:
+        cve_id:
+          type: string
+          description: The CVE ID
+        description:
+          type: string
+          description: The description of the CVE
+        base_score_v2:
+          type: number
+          description: CVSS v2 base score
+        base_score_v3:
+          type: number
+          description: CVSS v3 base score
+        last_modified:
+          type: string
+          description: The date the CVE was last modified
+  404:
+    description: CVE not found

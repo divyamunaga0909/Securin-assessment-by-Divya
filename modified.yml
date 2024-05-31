@@ -1,0 +1,13 @@
+parameters:
+  - name: days
+    in: path
+    type: integer
+    required: true
+    description: The number of days
+responses:
+  200:
+    description: List of CVEs modified in the last N days
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/CVE'

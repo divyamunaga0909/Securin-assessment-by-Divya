@@ -1,0 +1,100 @@
+swagger: '2.0'
+info:
+  title: CVE API
+  description: API for retrieving CVE details
+  version: 1.0.0
+host: 'localhost:5000'
+schemes:
+  - http
+paths:
+  /cve/{cve_id}:
+    get:
+      tags:
+        - CVE
+      summary: Get CVE details by CVE ID
+      parameters:
+        - name: cve_id
+          in: path
+          required: true
+          type: string
+          description: The CVE ID
+      responses:
+        200:
+          description: CVE details
+          schema:
+            $ref: '#/definitions/CVE'
+        404:
+          description: CVE not found
+  /cve/year/{year}:
+    get:
+      tags:
+        - CVE
+      summary: Get CVE details by year
+      parameters:
+        - name: year
+          in: path
+          required: true
+          type: integer
+          description: The year of the CVEs
+      responses:
+        200:
+          description: List of CVEs for the specified year
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CVE'
+  /cve/score:
+    get:
+      tags:
+        - CVE
+      summary: Get CVE details by score range
+      parameters:
+        - name: min_score
+          in: query
+          required: true
+          type: number
+          description: The minimum CVSS score
+        - name: max_score
+          in: query
+          required: true
+          type: number
+          description: The maximum CVSS score
+      responses:
+        200:
+          description: List of CVEs within the specified score range
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CVE'
+  /cve/modified/{days}:
+    get:
+      tags:
+        - CVE
+      summary: Get CVE details modified in the last N days
+      parameters:
+        - name: days
+          in: path
+          required: true
+          type: integer
+          description: The number of days
+      responses:
+        200:
+          description: List of CVEs modified in the last N days
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CVE'
+definitions:
+  CVE:
+    type: object
+    properties:
+      cve_id:
+        type: string
+      description:
+        type: string
+      base_score_v2:
+        type: number
+      base_score_v3:
+        type: number
+      last_modified:
+        type: string
